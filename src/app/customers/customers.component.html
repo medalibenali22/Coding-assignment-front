@@ -1,0 +1,33 @@
+<div class="container">
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Sure name</th>
+        <th>Account</th>
+        <th>Transactions</th>
+        <th width="220px">Action</th>
+    </tr>
+
+    <tr *ngFor="let customer of customers">
+        <td>{{ customer.customerId }}</td>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.surname }}</td>
+        <td> Id :{{ customer.account?.id }} - Current Balance :{{ customer.account?.balance }} </td>
+        <td>
+            <div *ngIf="$any(customer.account?.transaction)?.length > 0">
+                <ul class="list-group list-group-flush" *ngFor="let transaction of customer?.account?.transaction" >
+                    <li class="list-group-item">{{transaction.id}} | {{transaction.amount}} | {{transaction.transactionDate}} | {{transaction.transactionType}}</li>
+                </ul>
+
+            </div>
+           
+        </td>
+        <td >
+            <button  class="btn btn-customized" (click)="createAccount(customer.customerId)" [disabled]="customer.account">Create Account</button>
+
+        </td>
+      </tr>
+
+</table>
+</div>
